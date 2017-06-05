@@ -265,5 +265,11 @@ img{
 .map{
 	width: 65%;
 	border-left: solid 1px #292929;
+	padding-left: 5%;
 	float: right;
+}
+#main-map{
+	width: 96%;
+	height: auto;
+	overflow: hidden;
 }
