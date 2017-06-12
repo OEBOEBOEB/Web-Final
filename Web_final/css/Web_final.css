@@ -314,7 +314,7 @@ img{
 	outline: none;
 	cursor: pointer;
 }
-.route-planning-hidden:hover button{
+.route-planning-hidden button:hover{
 	font-family: 微軟正黑體;
 	color: #f38a29;
 	background: #292929;
@@ -372,7 +372,7 @@ img{
 	outline: none;
 	cursor: pointer;
 }
-.area-exploring-hidden:hover button{
+.area-exploring-hidden button:hover{
 	font-family: 微軟正黑體;
 	color: #f38a29;
 	background: #292929;
