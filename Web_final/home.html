@@ -7,6 +7,9 @@
 	<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
 </head>
 <body>
+	<div class="header">
+		<h1>高雄美食地圖 <span>|</span> </h1>
+	</div>
 	<div class="box">
 		<div class="setting-list">
 			<div class="search">
@@ -16,19 +19,44 @@
 			</div>
 			<div class="setting-data">
 				<div class="fb-login">
-					<button id=""><i class="fa fa-facebook-square fa-3x" aria-hidden="true"></i><p>FB登入</p></button>
+					<button id="fb-login-btn"><i class="fa fa-facebook-square fa-3x" aria-hidden="true"></i><p>FB登入</p></button>
+				</div>
+				<div class="fb-login-hidden" id="fb-login-active">
+					<a href="#">
+						&nbsp;<i class="fa fa-angle-double-right" aria-hidden="true"></i> 非死不可登入la
+					</a>
 				</div>
 				<div class="my-favor">
-					<button id=""><i class="fa fa-star fa-3x" aria-hidden="true"></i><p>我的最愛</p></button>
+					<button id="my-favor-btn"><i class="fa fa-star fa-3x" aria-hidden="true"></i><p>我的最愛</p></button>
+				</div>
+				<div class="my-favor-hidden" id="my-favor-active">
+					<ul>
+						<li><button>益盛香自助火鍋</button></li>
+						<li><button>老闆娘的笑容</button></li>
+						<li><button>是最好的調味料</button></li>
+					</ul>
 				</div>
 				<div class="friends-data">
-					<button id=""><i class="fa fa-users fa-3x" aria-hidden="true"></i><p>我的好友</p></button>
+					<button id="friends-data-btn"><i class="fa fa-users fa-3x" aria-hidden="true"></i><p>我的好友</p></button>
+				</div>
+				<div class="friends-data-hidden" id="friends-data-active">
+					<p>好友列表，沒做出來沒概念</p>
+					<p>maybe出現大頭貼</p>
 				</div>
 				<div class="route-planning">
-					<button id=""><i class="fa fa-location-arrow fa-lg" aria-hidden="true" id="route-btn-l"></i><i class="fa fa-google fa-2x" aria-hidden="true" id="route-btn-g"></i><p>規劃路線</p></button>
+					<button id="route-planning-btn"><i class="fa fa-location-arrow fa-lg" aria-hidden="true" id="route-btn-l"></i><i class="fa fa-google fa-2x" aria-hidden="true" id="route-btn-g"></i><p>規劃路線</p></button>
+				</div>
+				<div class="route-planning-hidden" id="route-planning-active">
+					<input type="text" placeholder="輸入起點或使用定位">
+					<input type="text" placeholder="輸入目的地">
+					<button>G O</button>
 				</div>
 				<div class="area-exploring">
-					<button id=""><i class="fa fa-eye fa-3x" aria-hidden="true"></i><p>探索區域</p></button>
+					<button id="area-exploring-btn"><i class="fa fa-eye fa-3x" aria-hidden="true"></i><p>探索區域</p></button>
+				</div>
+				<div class="area-exploring-hidden" id="area-exploring-active">
+					<p>您現在位於：</p>
+					<button>G O</button>
 				</div>
 			</div>
 		</div>
@@ -38,6 +66,12 @@
 				<img src="img/1.png" id="main-map"><!--到時候換成js地圖 -->
 			</div>
 		</div>
+		<div class="clear"></div>
 	</div>
+	<div class="footer">
+		<p>Copyright© 2017 NUKIM. All rights reserved.</p>
+	</div>
+	<script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+	<script type="text/javascript" src="js/all.js"></script>
 </body>
 </html>
