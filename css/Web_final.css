@@ -51,8 +51,8 @@ table {
 body {
     font: 14px/25px "微軟正黑體";
     color: #292929;
-    width: 1200px;
-	margin:0 auto;
+	
+
 }
 
 img{
@@ -62,13 +62,13 @@ img{
 	clear: both;
 }
 .header{
-	
-	padding: 2.5% 1%;
-	padding-left: 7%;
+	width: 98%;
+	padding: 2.5% 1%;	
 	margin-bottom: 50px;
 	background: #f38a29;
 }
 .header h1{
+	padding-left: 3.5%;
 	font-size: 48px;
 	color: #FFF;
 }
@@ -80,16 +80,20 @@ img{
 
 }
 .box{
+	width: 100%;
+	margin: 0 auto;
+	margin-top: 35px;
+	padding-top: 1%;
 	
-	margin: 35px auto;
 }
 .setting-list{
 	width: 25%;
+	padding-left: 2.5%;
 	float: left;
 }
 .search{
-	width: 90%;
-	margin: 20px auto;
+	width: 80%;
+	margin: 1% auto;
 	padding: 0 2% 1% 2%;
 	border: 1px solid #ccc;
 	border-bottom: solid 1px #DDDDDD;
@@ -110,7 +114,7 @@ img{
 }
 .fb-login{
 	width: 90%;
-	margin: 10px auto;
+	margin: 0.5% auto;
 	padding: 2%;
 }
 .fb-login button{
@@ -152,7 +156,7 @@ img{
 	color: #292929;
 }
 .fb-login-hidden:hover a{
-	width: 100%;
+	width: 92%;
 	display: inline-block;
 	padding: 1% 0;
 	background: #3b5998;
@@ -162,7 +166,7 @@ img{
 }
 .my-favor{
 	width: 90%;
-	margin: 10px auto;
+	margin: 0.5% auto;
 	padding: 2%;
 }
 .my-favor button{
@@ -214,7 +218,7 @@ img{
 }
 .friends-data{
 	width: 90%;
-	margin: 10px auto;
+	margin: 0.5% auto;
 	padding: 2%;
 }
 .friends-data button{
@@ -252,7 +256,7 @@ img{
 }
 .route-planning{
 	width: 90%;
-	margin: 10px auto;
+	margin: 0.5% auto;
 	padding: 2%;
 }
 .route-planning button{
@@ -316,7 +320,7 @@ img{
 	outline: none;
 	cursor: pointer;
 }
-.route-planning-hidden button+++:hover{
+.route-planning-hidden button:hover{
 	font-family: 微軟正黑體;
 	color: #f38a29;
 	background: #292929;
@@ -324,7 +328,7 @@ img{
 }
 .area-exploring{
 	width: 90%;
-	margin: 10px auto;
+	margin: 0.5% auto;
 	padding: 2%;
 }
 .area-exploring button{
@@ -392,16 +396,13 @@ img{
 	overflow: hidden;
 }
 .footer{
-	
+	width: 100%;
 	background: #292929;
-	padding: 1%;
+	padding: 1.5% 0;
 	opacity: 0.87;
-	margin-top: 135px;
+	margin-top: 3%;
 }
 .footer p{
 	color: #FFF;
 	text-align: center;
-}
-body{
-	
 }
