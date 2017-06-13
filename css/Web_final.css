@@ -51,8 +51,6 @@ table {
 body {
     font: 14px/25px "微軟正黑體";
     color: #292929;
-	
-
 }
 
 img{
@@ -64,7 +62,7 @@ img{
 .header{
 	width: 98%;
 	padding: 2.5% 1%;	
-	margin-bottom: 50px;
+	margin-bottom: 3%;
 	background: #f38a29;
 }
 .header h1{
@@ -82,8 +80,7 @@ img{
 .box{
 	width: 100%;
 	margin: 0 auto;
-	margin-top: 35px;
-	padding-top: 1%;
+	margin-top: 1%;
 	
 }
 .setting-list{
@@ -93,7 +90,8 @@ img{
 }
 .search{
 	width: 80%;
-	margin: 1% auto;
+	margin-bottom: 5%;
+	margin-left: 10%;
 	padding: 0 2% 1% 2%;
 	border: 1px solid #ccc;
 	border-bottom: solid 1px #DDDDDD;
@@ -116,6 +114,7 @@ img{
 	width: 90%;
 	margin: 0.5% auto;
 	padding: 2%;
+	padding-left: 15%;
 }
 .fb-login button{
 	width: 100%;
@@ -160,7 +159,7 @@ img{
 	display: inline-block;
 	padding: 1% 0;
 	background: #3b5998;
-	border-radius: 2px;
+	border-radius: 2%;
 	color: #FFF;
 	transition: 0.4s;
 }
@@ -168,6 +167,7 @@ img{
 	width: 90%;
 	margin: 0.5% auto;
 	padding: 2%;
+	padding-left: 15%;
 }
 .my-favor button{
 	width: 100%;
@@ -220,6 +220,7 @@ img{
 	width: 90%;
 	margin: 0.5% auto;
 	padding: 2%;
+	padding-left: 15%;
 }
 .friends-data button{
 	width: 100%;
@@ -258,6 +259,7 @@ img{
 	width: 90%;
 	margin: 0.5% auto;
 	padding: 2%;
+	padding-left: 15%;
 }
 .route-planning button{
 	width: 100%;
@@ -284,14 +286,14 @@ img{
 #route-btn-g{
 	color: #CC0000;
 	position: absolute;
-	left: -3px;
-	top: 16px;
+	left: -1%;
+	top: 31%;
 	z-index: 2;
 }
 #route-btn-l{
 	color: #0000B2;
 	position: absolute;
-	left: 15px;
+	left: 7%;
 	z-index: 1;
 }
 .route-planning:hover button{
@@ -313,9 +315,9 @@ img{
 	font-family: 微軟正黑體;
 	padding: 1.5% 3%;
 	margin-left: 50%;
-	margin-top: 5px;
+	margin-top: 1.5%;
 	background: #f38a29;
-	border-radius: 2px;
+	border-radius: 5%;
 	border: none;
 	outline: none;
 	cursor: pointer;
@@ -330,6 +332,7 @@ img{
 	width: 90%;
 	margin: 0.5% auto;
 	padding: 2%;
+	padding-left: 15%;
 }
 .area-exploring button{
 	width: 100%;
@@ -371,9 +374,9 @@ img{
 	font-family: 微軟正黑體;
 	padding: 1.5% 3%;
 	margin-left: 50%;
-	margin-top: 5px;
+	margin-top: 1.5%;
 	background: #f38a29;
-	border-radius: 2px;
+	border-radius: 5%;
 	border: none;
 	outline: none;
 	cursor: pointer;
