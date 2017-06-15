@@ -66,38 +66,80 @@
 	</div>
 		<div id="map" style="margin-right: 10px;"></div>
 		<script type="text/javascript">
+		var map;
       	function initMap() {
-       		var map = new google.maps.Map(document.getElementById('map'), {
-          		center: {lat: -34.397, lng: 150.644},
+
+       		map = new google.maps.Map(document.getElementById('map'), {
+          		center: {lat: 22.7254872, lng: 120.2978743},
           		zoom: 6
         	});
-        	var infoWindow = new google.maps.InfoWindow({map: map});
 
-        	// Try HTML5 geolocation.
-        	if (navigator.geolocation) {
-         	 	navigator.geolocation.getCurrentPosition(function(position) {
-            			var pos = {
-              				lat: position.coords.latitude,
-              				lng: position.coords.longitude
-            			};
-            		infoWindow.setPosition(pos);
-            		infoWindow.setContent('Location found.');
-            		map.setCenter(pos);
-          		}, function() {
-            		handleLocationError(true, infoWindow, map.getCenter());
-          			});
-        		} else {
-          // Browser doesn't support Geolocation
-          		handleLocationError(false, infoWindow, map.getCenter());
-        	}
+       		// var markers = [
+       		// 	{lng: 120.2978, lat: 22.725},
+       		// 	{lat: 22.725, lng: 120.29776}
+       		// ]
+
+       		var xmlhttp = new XMLHttpRequest();
+			xmlhttp.open("get","http://data.kaohsiung.gov.tw/Opendata/DownLoad.aspx?Type=2&CaseNo1=AV&CaseNo2=2&FileType=1&Lang=C&FolderType%22");
+			xmlhttp.onload=function(){
+				var data = JSON.parse(xmlhttp.responseText);
+       			Object.keys(data).forEach((i) => {
+       				console.log(data[i]);
+	       			new google.maps.Marker({
+	       				map: map,
+	       				position: {
+	       					lat: parseFloat(data[i].Py),
+	       					lng: parseFloat(data[i].Px)
+       					}
+       				})
+       			});
+			};
+			xmlhttp.send();
+
+
+       	// 	Object.keys(markers).forEach((i) => {
+       	// 		new google.maps.Marker({
+       	// 			position: markers[i],
+       	// 			map: map
+       	// 		})
+       	// 	})
+
+        // 	var marker = new google.maps.Marker({
+		      // 	position: {
+		      // 		lat: 22.7254872,
+		      // 		lng: 120.2978743
+		      // 	},
+		      // 	map: map
+		      // });
+        	// var infoWindow = new google.maps.InfoWindow({map: map});
+
+        	// // Try HTML5 geolocation.
+        	// if (navigator.geolocation) {
+         // 	 	navigator.geolocation.getCurrentPosition(function(position) {
+         //    			var pos = {
+         //      				lat: position.coords.latitude,
+         //      				lng: position.coords.longitude
+         //    			};
+         //    		infoWindow.setPosition(pos);
+         //    		infoWindow.setContent('Location found.');
+         //    		map.setCenter(pos);
+         //  		}, function() {
+         //    		handleLocationError(true, infoWindow, map.getCenter());
+         //  			});
+        	// 	} else {
+         //  // Browser doesn't support Geolocation
+         //  		handleLocationError(false, infoWindow, map.getCenter());
+        	// }
       	}
 
-      function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-        infoWindow.setPosition(pos);
-        infoWindow.setContent(browserHasGeolocation ?
-                              'Error: The Geolocation service failed.' :
-                              'Error: Your browser doesn\'t support geolocation.');
-      }
+      // function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+      //   infoWindow.setPosition(pos);
+      //   infoWindow.setContent(browserHasGeolocation ?
+      //                         'Error: The Geolocation service failed.' :
+      //                         'Error: Your browser doesn\'t support geolocation.');
+      // }
+
+      
     </script>
     <script type="text/javascript"
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDpiRJNSYQ9a-B8o3c-LIH95wnhG7Bw7Cg&callback=initMap">
