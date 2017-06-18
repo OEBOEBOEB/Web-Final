@@ -186,7 +186,7 @@
 						});
 						// 弄出一個 infoWindow
 						var infoWindow = new google.maps.InfoWindow({
-							content: '<h2>' + data[i].Name + '</h2><p>' + data[i].Description + '</p>'
+							content: '<h2>' + data[i].Name + '</h2><p>' + data[i].Description + data[i].Opentime + '</p>'
 							+ '<div data-id="'+ i +'" class="route-now">我要到這裡！</div>'
 							+ '<div data-id="'+ i +'" class="add-to-favorite">加到最愛！</div>'
 						});
