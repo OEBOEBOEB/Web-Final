@@ -430,3 +430,71 @@ img{
 	text-decoration: underline;
 	cursor: pointer;
 }
+@media (max-width: 320px){
+	.header{
+		padding-top: 6%;
+		padding-bottom: 6%;
+		padding-left: 0%;
+		text-align: center;
+		margin-bottom: 0%;
+	}
+	.header h1{
+		font-size: 34px;
+	}
+	.header h1 span{
+		font-size: 30px;
+	}
+	.setting-list{
+		width: 95%;
+	}
+	body #map{
+		width: 98%;
+		height: 50%;
+		padding: 0 1% 0 1%;
+		top: 10px;
+		margin-bottom: 15%;
+	}
+	.search{
+		margin-left: 5%;
+		padding: 2% 4% 2% 4%;
+		font-size: 24px;
+		margin-top: 5%;
+	}
+	#search-text{
+		font-size: 18px;
+	}
+	#search-btn{
+		font-size: 1em;
+	}
+	.fb-login,.my-favor,.friends-data,.route-planning,.area-exploring{
+		padding-left: 0%;
+		text-align: center;
+	}
+	.fb-login-hidden:hover a{
+		width: 60%;
+		margin-right: 0px;
+	}
+	.route-planning-hidden input{
+		width: 60%;
+		padding: 2%;
+		font-size: 18px;
+		margin-top: 4px;
+	}
+	.fb-login-hidden,.my-favor-hidden,.route-planning-hidden{
+		margin-left: 23%;
+	}
+	.my-favor-hidden{
+		font-size: 24px;
+	}
+	.route-planning-hidden button{
+		padding: 8px 15px 8px 15px;
+		margin-left: 47%;
+	}
+	.area-exploring-hidden p{
+		font-size: 18px;
+	}
+	.area-exploring-hidden button{
+		padding: 8px 15px 8px 15px;
+		margin-left: 47%;
+	}
+}
