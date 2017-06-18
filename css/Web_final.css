@@ -480,8 +480,9 @@ img{
 		font-size: 18px;
 		margin-top: 4px;
 	}
-	.fb-login-hidden,.my-favor-hidden,.route-planning-hidden{
-		margin-left: 23%;
+	.fb-login-hidden,.my-favor-hidden,.area-exploring-hidden,.route-planning-hidden{
+		width: 68%;
+		margin-left: 28%;
 	}
 	.my-favor-hidden{
 		font-size: 24px;
