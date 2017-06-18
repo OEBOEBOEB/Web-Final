@@ -32,6 +32,7 @@
 				<div class="fb-login">
 					<button id="fb-login-btn"><i class="fa fa-facebook-square fa-3x" aria-hidden="true"></i><p>FB登入</p></button>
 				</div>
+
 				<div class="fb-login-hidden" id="fb-login-active">
 					<div class="fb-login-button" data-scope="user_friends" data-max-rows="1" data-size="large" data-button-type="login_with" data-show-faces="true" data-auto-logout-link="true" data-use-continue-as="true"></div>
 				</div>
@@ -116,6 +117,7 @@
 		var currentAddress; // 全域存現在地址
 		var currentPosition; // 全域存現在經緯度
 
+
 		function initMap() {
 			if (navigator.geolocation) {
 				// 如果可以抓地點
@@ -126,6 +128,7 @@
 						lng: position.coords.longitude,
 					};
 					currentPosition = coords;
+
 					map = new google.maps.Map(document.getElementById('map'), {
 						center: coords,
 						zoom: 8,
@@ -136,13 +139,16 @@
 						latLng: coords
 					}, function(result, status) {
 						if (status === google.maps.GeocoderStatus.OK) {
+
 							currentAddress = result[0].formatted_address;
 							var currentArea = result.filter(function(x) {
 								return x.types[0] === 'administrative_area_level_3';
 							})[0].address_components[0].short_name;
 							$('#current-area').text(currentArea);
+
 							$('#area').val(currentArea);
 							areaExploring(currentArea);
+
 						} else {
 							$('#current-area').text('無法取得');
 						}
@@ -357,3 +363,4 @@
 </body>
 
 </html>
+
