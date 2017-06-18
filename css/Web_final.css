@@ -430,7 +430,7 @@ img{
 	text-decoration: underline;
 	cursor: pointer;
 }
-@media (max-width: 768px){
+@media (max-width: 480px){
 	.header{
 		padding-top: 6%;
 		padding-bottom: 6%;
