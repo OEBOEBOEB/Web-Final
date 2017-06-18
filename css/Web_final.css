@@ -417,3 +417,17 @@ img{
 	margin-right: 10px;
 	border-left: 2px solid;
 }
+
+/* infoWindow 裡面的 h2 */
+.gm-style-iw h2{
+	font-size: 20px;
+	margin: 5px;
+	font-weight: bold;
+}
+
+.route-now, .add-to-favorite{
+	text-align: right;
+	font-size: 18px;
+	text-decoration: underline;
+	cursor: pointer;
+}

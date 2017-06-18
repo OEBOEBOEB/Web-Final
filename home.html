@@ -1,14 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<title>高雄美食地圖</title>
 	<link rel="stylesheet" type="text/css" href="css/Web_final.css">
 	<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
 	<style type="text/css">
-      html, body, #map { height: 100%; margin: 0; padding: 0;}
-    </style>
+		html,
+		body,
+		#map {
+			height: 100%;
+			margin: 0;
+			padding: 0;
+		}
+	</style>
 </head>
+
 <body>
 	<div class="header">
 		<h1>高雄美食地圖 <span>|</span> </h1>
@@ -25,88 +33,327 @@
 					<button id="fb-login-btn"><i class="fa fa-facebook-square fa-3x" aria-hidden="true"></i><p>FB登入</p></button>
 				</div>
 				<div class="fb-login-hidden" id="fb-login-active">
-					<a href="#">
-						&nbsp;<i class="fa fa-angle-double-right" aria-hidden="true"></i> 非死不可登入la
-					</a>
+					<div class="fb-login-button" data-scope="user_friends" data-max-rows="1" data-size="large" data-button-type="login_with" data-show-faces="true" data-auto-logout-link="true" data-use-continue-as="true"></div>
 				</div>
 				<div class="my-favor">
 					<button id="my-favor-btn"><i class="fa fa-star fa-3x" aria-hidden="true"></i><p>我的最愛</p></button>
 				</div>
 				<div class="my-favor-hidden" id="my-favor-active">
-					<ul>
-						<li><button>益盛香自助火鍋</button></li>
-						<li><button>老闆娘的笑容</button></li>
-						<li><button>是最好的調味料</button></li>
+					<ul id="favorites">
 					</ul>
 				</div>
 				<div class="friends-data">
 					<button id="friends-data-btn"><i class="fa fa-users fa-3x" aria-hidden="true"></i><p>我的好友</p></button>
 				</div>
 				<div class="friends-data-hidden" id="friends-data-active">
-					<p>好友列表，沒做出來沒概念</p>
-					<p>maybe出現大頭貼</p>
+					<ul id="list"></ul>
 				</div>
 				<div class="route-planning">
 					<button id="route-planning-btn"><i class="fa fa-location-arrow fa-lg" aria-hidden="true" id="route-btn-l"></i><i class="fa fa-google fa-2x" aria-hidden="true" id="route-btn-g"></i><p>規劃路線</p></button>
 				</div>
 				<div class="route-planning-hidden" id="route-planning-active">
-					<p><input type="text" placeholder="輸入起點或使用定位"></p>
-					<p><input type="text" placeholder="輸入目的地"></p>
+					<!--<p><input type="text" placeholder="輸入起點或使用定位"></p>
+					<p><input type="text" placeholder="輸入目的地"></p>-->
 					<button>GO</button>
 				</div>
 				<div class="area-exploring">
 					<button id="area-exploring-btn"><i class="fa fa-eye fa-3x" aria-hidden="true"></i><p>探索區域</p></button>
 				</div>
 				<div class="area-exploring-hidden" id="area-exploring-active">
-					<p>您現在位於：</p>
-					<button>GO</button>
+					<p>您現在位於：<span id="current-area"></span></p>
+					<select id="area">
+						<option>楠梓區</option>
+						<option>左營區</option>
+						<option>鼓山區</option>
+						<option>三民區</option>
+						<option>鹽埕區</option>
+						<option>前金區</option>
+						<option>新興區</option>
+						<option>苓雅區</option>
+						<option>前鎮區</option>
+						<option>旗津區</option>
+						<option>小港區</option>
+						<option>鳳山區</option>
+						<option>大寮區</option>
+						<option>鳥松區</option>
+						<option>林園區</option>
+						<option>仁武區</option>
+						<option>大樹區</option>
+						<option>大社區</option>
+						<option>岡山區</option>
+						<option>路竹區</option>
+						<option>橋頭區</option>
+						<option>梓官區</option>
+						<option>彌陀區</option>
+						<option>永安區</option>
+						<option>燕巢區</option>
+						<option>田寮區</option>
+						<option>阿蓮區</option>
+						<option>茄萣區</option>
+						<option>湖內區</option>
+						<option>旗山區</option>
+						<option>美濃區</option>
+						<option>內門區</option>
+						<option>杉林區</option>
+						<option>甲仙區</option>
+						<option>六龜區</option>
+						<option>茂林區</option>
+						<option>桃源區</option>
+						<option>那瑪夏區</option>
+					</select>
+					<!--<button>GO</button>-->
 				</div>
 			</div>
 		</div>
 	</div>
-		<div id="map" style="margin-right: 10px;"></div>
-		<script type="text/javascript">
-      	function initMap() {
-       		var map = new google.maps.Map(document.getElementById('map'), {
-          		center: {lat: -34.397, lng: 150.644},
-          		zoom: 6
-        	});
-        	var infoWindow = new google.maps.InfoWindow({map: map});
+	<div id="map" style="margin-right: 10px;"></div>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		var map; // 全域存地圖
+		var directionsService; // 全域存路徑規劃的服務，好處是你規劃新路徑的時候會把舊路徑砍掉
+		var directionsDisplay; // 全域存路徑規劃的服務，好處是你規劃新路徑的時候會把舊路徑砍掉
+		var restaurants = []; // 全域存餐廳
+		var currentAddress; // 全域存現在地址
+		var currentPosition; // 全域存現在經緯度
 
-        	// Try HTML5 geolocation.
-        	if (navigator.geolocation) {
-         	 	navigator.geolocation.getCurrentPosition(function(position) {
-            			var pos = {
-              				lat: position.coords.latitude,
-              				lng: position.coords.longitude
-            			};
-            		infoWindow.setPosition(pos);
-            		infoWindow.setContent('Location found.');
-            		map.setCenter(pos);
-          		}, function() {
-            		handleLocationError(true, infoWindow, map.getCenter());
-          			});
-        		} else {
-          // Browser doesn't support Geolocation
-          		handleLocationError(false, infoWindow, map.getCenter());
-        	}
-      	}
+		function initMap() {
+			if (navigator.geolocation) {
+				// 如果可以抓地點
+				navigator.geolocation.getCurrentPosition(function(position) {
+					// 產生地圖
+					var coords = {
+						lat: position.coords.latitude,
+						lng: position.coords.longitude,
+					};
+					currentPosition = coords;
+					map = new google.maps.Map(document.getElementById('map'), {
+						center: coords,
+						zoom: 8,
+					});
 
-      function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-        infoWindow.setPosition(pos);
-        infoWindow.setContent(browserHasGeolocation ?
-                              'Error: The Geolocation service failed.' :
-                              'Error: Your browser doesn\'t support geolocation.');
-      }
-    </script>
-    <script type="text/javascript"
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDpiRJNSYQ9a-B8o3c-LIH95wnhG7Bw7Cg&callback=initMap">
-    </script>
-		<div class="clear"></div>
+					geocoder = new google.maps.Geocoder;
+					geocoder.geocode({
+						latLng: coords
+					}, function(result, status) {
+						if (status === google.maps.GeocoderStatus.OK) {
+							currentAddress = result[0].formatted_address;
+							var currentArea = result.filter(function(x) {
+								return x.types[0] === 'administrative_area_level_3';
+							})[0].address_components[0].short_name;
+							$('#current-area').text(currentArea);
+							$('#area').val(currentArea);
+							areaExploring(currentArea);
+						} else {
+							$('#current-area').text('無法取得');
+						}
+					});
+				});
+			} else {
+				// 無法定位，亂設一組位置
+				var coords = {
+						lat: -34.397,
+						lng: 150.644
+					}
+					// 產生地圖
+				map = new google.maps.Map(document.getElementById('map'), {
+					center: coords,
+					zoom: 8,
+				});
+			}
+
+			// 抓開放資料
+			$.ajax({
+				url: 'https://data.kaohsiung.gov.tw/Opendata/DownLoad.aspx?Type=2&CaseNo1=AV&CaseNo2=2&FileType=1&Lang=C&FolderType',
+				dataType: 'json',
+				method: 'GET',
+				// 成功的話跑以下這個 function
+				success: function(data) {
+					Object.keys(data).forEach(function(i) {
+						// 弄出一個地標
+						var marker = new google.maps.Marker({
+							position: {
+								lat: parseFloat(data[i].Py),
+								lng: parseFloat(data[i].Px),
+							},
+							// map: map  // 原本要在這裡指定地圖，但我沒指定就不會顯示
+						});
+						// 弄出一個 infoWindow
+						var infoWindow = new google.maps.InfoWindow({
+							content: '<h2>' + data[i].Name + '</h2><p>' + data[i].Description + '</p>'
+							+ '<div data-id="'+ i +'" class="route-now">我要到這裡！</div>'
+							+ '<div data-id="'+ i +'" class="add-to-favorite">加到最愛！</div>'
+						});
+						// 讓 marker 點下去就會開 infoWindow
+						marker.addListener('click', function() {
+							// 其他所有 infoWindow 都藏起來
+							Object.keys(restaurants).forEach(function(j) {
+									restaurants[j].infoWindow.close();
+								})
+								// 只打開這個
+							restaurants[i].infoWindow.open(map, restaurants[i].marker);
+						});
+						// 把這些東西弄成一個 Object，就是原本的資料再塞剛剛的 marker 跟 infoWindow;
+						var d = data[i];
+						d.marker = marker;
+						d.infoWindow = infoWindow;
+						// 把這個 object 塞進 Restaurant 裡面
+						restaurants.push(d);
+					})
+				}
+			});
+
+			// #search-text 裡面的文字改變就做搜尋，這邊可以再改
+			$('#search-text').on('input', function() {
+				search($(this).val());
+			});
+
+			// 搜尋方法
+			function search(keyword) {
+				if (keyword === '') {
+					// 空的話隱藏所有地標、關掉所有 infoWindow
+					Object.keys(restaurants).forEach(function(i) {
+						restaurants[i].marker.setMap(null);
+						restaurants[i].infoWindow.close();
+					});
+				} else {
+					// for each all restaurants
+					Object.keys(restaurants).forEach(function(i) {
+						// 如果餐廳的名字或描述包含(indexOf，只要不包含就會是-1) keyword 的話
+						if (restaurants[i].Name.indexOf(keyword) !== -1 || restaurants[i].Description.indexOf(keyword) !== -1) {
+							// 把這個地標設在地圖上
+							restaurants[i].marker.setMap(map);
+						} else {
+							// 把這個地標不要放在地圖上
+							restaurants[i].marker.setMap(null);
+						}
+					});
+				}
+			}
+
+			// #area 改變的時候就做探索區域
+			$('#area').on('change', function() {
+				areaExploring($(this).val());
+			});
+
+			// 探索區域的方法
+			function areaExploring(area) {
+				Object.keys(restaurants).forEach(function(i) {
+					// 如果餐廳的地址包含(indexOf，只要不包含就會是-1) area 的話
+					if (restaurants[i].Add.indexOf(area) !== -1) {
+						// 把這個地標設在地圖上
+						restaurants[i].marker.setMap(map);
+					} else {
+						// 把這個地標不要放在地圖上
+						restaurants[i].marker.setMap(null);
+					}
+				});
+			}
+
+			// 點擊加到最愛的話
+			$('body').delegate('.add-to-favorite', 'click', function(){
+				//找出按鈕的 id，然後找出餐廳
+				var restaurant = restaurants[$(this).data('id')];
+				// 讀取出 localStorage，會是一個陣列，沒有的話就新增一個陣列
+				var favoraites = JSON.parse(localStorage.getItem('favorite')) || [];
+				// 把餐廳名字存到 localStorage 裡面
+				if(favoraites.filter(function(x){ return x === restaurant.Name }).length === 0){
+					favoraites.push(restaurant.Name);
+					$('#favorites').append('<li class="favorite">'+ restaurant.Name +'</li>');
+				}
+				// 存回去
+				localStorage.setItem('favorite', JSON.stringify(favoraites));
+				$(this).text('已加入！');
+				$(this).fadeOut(1000);
+			});
+
+			// 列出我的最愛
+			if(localStorage.getItem('favorite')){
+				var favorites = JSON.parse(localStorage.getItem('favorite'));
+				Object.keys(favorites).forEach(function(i){
+					$('#favorites').append('<li class="favorite">'+ favorites[i] +'</li>');
+				});
+			}
+
+			// 點擊我的最愛時
+			$('body').delegate('.favorite', 'click', function(){
+				var restaurantName = $(this).text();
+				var restaurant = restaurants.filter(function(x){
+					return x.Name === restaurantName;
+				})[0]
+				restaurant.marker.setMap(map);
+				restaurant.infoWindow.open(map, restaurant.marker);
+			});
+
+			// 點擊規劃路線時
+			$('body').delegate('.route-now', 'click', function(){
+				//找出按鈕的 id，然後找出餐廳
+				var restaurant = restaurants[$(this).data('id')];
+				// 如果有舊的導航路徑就清空
+				if(directionsDisplay != null){
+					directionsDisplay.setMap(null);
+					directionsDisplay = null;
+				}
+				// 咩，以下導航
+				directionsService = new google.maps.DirectionsService();
+				directionsDisplay = new google.maps.DirectionsRenderer();
+				directionsDisplay.setMap(map);
+				directionsService.route({
+					origin: currentAddress, // 導航頭
+					destination: restaurant.Add, // 導航尾
+					travelMode: 'DRIVING'
+				}, function(result, status){
+					if(status === 'OK'){
+						map.setCenter(currentPosition) // 地圖中心設現在位址
+						directionsDisplay.setDirections(result);
+						console.log(result);
+
+						// 以下算時間
+						$('.route-planning-hidden').slideDown();
+						$('.route-planning-hidden').text('約需要 ' + result.routes[0].legs[0].duration.text + ' 車程');
+					}
+				});
+			});
+		}
+	</script>
+	<div id="fb-root"></div>
+	<script>
+		(function(d, s, id) {
+			var js, fjs = d.getElementsByTagName(s)[0];
+			if (d.getElementById(id)) return;
+			js = d.createElement(s);
+			js.id = id;
+			js.src = "https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v2.9&appId=1364759770286107";
+			fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+
+		window.fbAsyncInit = function() {
+			FB.init({
+				appId: '1364759770286107',
+				xfbml: true,
+				version: 'v2.9'
+			});
+			FB.AppEvents.logPageView();
+
+			FB.getLoginStatus(function(response) {
+				// statusChangeCallback(response);
+				FB.api('/me/friends', function(response) {
+					Object.keys(response.data).forEach(function(i){
+						$('#list').append('<li>' + response.data[i].name + '</li>');
+					});
+				}, {
+					scope: 'user_friends'
+				});
+			});
+		};
+	</script>
+	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDpiRJNSYQ9a-B8o3c-LIH95wnhG7Bw7Cg&callback=initMap">
+	</script>
+	<div class="clear"></div>
 	<div class="footer">
 		<p>Copyright© 2017 NUKIM. All rights reserved.</p>
 	</div>
 	<script src="https://code.jquery.com/jquery-3.1.0.js"></script>
 	<script type="text/javascript" src="js/all.js"></script>
 </body>
+
 </html>
