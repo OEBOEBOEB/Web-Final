@@ -424,6 +424,13 @@ img{
 	font-size: 20px;
 	margin: 0.5%;
 	font-weight: bold;
+	font-family: "微軟正黑體";
+}
+.gm-style-iw p{
+	font-family: "微軟正黑體";
+}
+.gm-style-iw span{
+	font-color: #3b5998;
 }
 .route-now, .add-to-favorite{
 	text-align: right;
