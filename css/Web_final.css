@@ -435,6 +435,8 @@ img{
 .route-now, .add-to-favorite{
 	text-align: right;
 	font-size: 18px;
+	font-color: #f38a29;
+	font-family: "微軟正黑體";
 	text-decoration: underline;
 	cursor: pointer;
 }
