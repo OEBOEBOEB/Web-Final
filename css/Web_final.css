@@ -430,6 +430,7 @@ img{
 	font-family: "微軟正黑體";
 }
 .gm-style-iw span{
+	font-size: 18px;
 	color: #3b5998;
 }
 .route-now, .add-to-favorite{
@@ -437,6 +438,8 @@ img{
 	font-size: 18px;
 	color: #f38a29;
 	font-family: "微軟正黑體";
+}
+.route-now:hover, .add-to-favorite:hover{
 	text-decoration: underline;
 	cursor: pointer;
 }
